@@ -1,0 +1,4 @@
+outs:
+- md5: 724fa2c8617ee7c8bc47e5b37923968c
+  size: 2059
+  path: encoder.pickle

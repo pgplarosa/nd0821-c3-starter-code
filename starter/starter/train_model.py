@@ -15,10 +15,11 @@ logger.info("Extract data")
 data = pd.read_csv('../data/census.csv')
 data.columns = [col.strip() for col in data.columns]
 
-# Optional enhancement, use K-fold cross validation instead of a train-test split.
+# Optional enhancement, use K-fold cross validation instead of a
+# train-test split.
 logger.info("Split data")
-train, test = train_test_split(data, 
-                               test_size=0.20, 
+train, test = train_test_split(data,
+                               test_size=0.20,
                                random_state=143)
 
 cat_features = [
@@ -35,11 +36,11 @@ cat_features = [
 # Proces the test data with the process_data function.
 logger.info("Process train data")
 X_train, y_train, encoder, lb = process_data(
-        train, 
-        categorical_features=cat_features, 
-        label='salary', 
-        training=True
-    )
+    train,
+    categorical_features=cat_features,
+    label='salary',
+    training=True
+)
 
 X_test, y_test, encoder, lb = process_data(
     test,

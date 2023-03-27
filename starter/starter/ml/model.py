@@ -3,6 +3,8 @@ from sklearn.metrics import fbeta_score, precision_score, recall_score
 from ml.data import process_data
 
 # Optional: implement hyperparameter tuning.
+
+
 def train_model(X_train, y_train):
     """
     Trains a machine learning model and returns it.
@@ -28,7 +30,8 @@ def train_model(X_train, y_train):
 
 def compute_model_metrics(y, preds):
     """
-    Validates the trained machine learning model using precision, recall, and F1.
+    Validates the trained machine learning model
+      using precision, recall, and F1.
 
     Inputs
     ------
@@ -64,9 +67,10 @@ def inference(model, X):
     """
     return model.predict(X)
 
+
 def evaluate_model_slice_data(
-    model, data, categorical_features_list,
-    encoder, lb):
+        model, data, categorical_features_list,
+        encoder, lb):
 
     preds = {}
     for column in categorical_features_list:
@@ -80,10 +84,14 @@ def evaluate_model_slice_data(
                 encoder=encoder,
                 lb=lb,
             )
-            
-            predict = inference(model, X_feature)
-            precision, recall, fbeta = compute_model_metrics(y_feature, predict)
 
-            preds[feature] = {"precision": precision, "recall": recall, "fbeta": fbeta}
-            
+            predict = inference(model, X_feature)
+            precision, recall, fbeta = compute_model_metrics(
+                y_feature, predict)
+
+            preds[feature] = {
+                "precision": precision,
+                "recall": recall,
+                "fbeta": fbeta}
+
     return preds

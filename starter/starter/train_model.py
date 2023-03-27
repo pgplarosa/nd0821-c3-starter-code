@@ -17,7 +17,9 @@ data.columns = [col.strip() for col in data.columns]
 
 # Optional enhancement, use K-fold cross validation instead of a train-test split.
 logger.info("Split data")
-train, test = train_test_split(data, test_size=0.20)
+train, test = train_test_split(data, 
+                               test_size=0.20, 
+                               random_state=143)
 
 cat_features = [
     "workclass",
@@ -61,6 +63,10 @@ y_pred = mdl.inference(model, X_test)
 
 logger.info("Evaluate model")
 precision, recall, fbeta = mdl.compute_model_metrics(y_test, y_pred)
+
+logger.info(f'''Precision:{precision}
+            Recall:{recall}
+            fbeta:{fbeta}''')
 
 logger.info("Evaluate metrics for data slices")
 metrics_category = mdl.evaluate_model_slice_data(

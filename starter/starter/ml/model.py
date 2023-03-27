@@ -1,6 +1,6 @@
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import fbeta_score, precision_score, recall_score
-
+from ml.data import process_data
 
 # Optional: implement hyperparameter tuning.
 def train_model(X_train, y_train):
@@ -63,3 +63,27 @@ def inference(model, X):
         Predictions from the model.
     """
     return model.predict(X)
+
+def evaluate_model_slice_data(
+    model, data, categorical_features_list,
+    encoder, lb):
+
+    preds = {}
+    for column in categorical_features_list:
+        for feature in data[column].unique():
+            data_temp = data[data[column] == feature]
+            X_feature, y_feature, encoder, lb = process_data(
+                data_temp,
+                categorical_features=categorical_features_list,
+                label="salary",
+                training=False,
+                encoder=encoder,
+                lb=lb,
+            )
+            
+            predict = inference(model, X_feature)
+            precision, recall, fbeta = compute_model_metrics(y_feature, predict)
+
+            preds[feature] = {"precision": precision, "recall": recall, "fbeta": fbeta}
+            
+    return preds

@@ -1,3 +1,6 @@
 starter/notebooks/
 starter/starter/ml/__pycache__/
 starter/starter/__pycache__/
+.vscode/
+starter/__pycache__/
+starter/notebook/.ipynb_checkpoints/

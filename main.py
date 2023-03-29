@@ -4,18 +4,18 @@ from pydantic import BaseModel
 import pickle
 import pandas as pd
 
-from starter.ml.data import process_data
+from starter.starter.ml.data import process_data
 
 app = FastAPI()
 
 # Import model, encoder and lb
-with open('model/model.pickle', 'rb') as pickle_file:
+with open('starter/model/model.pickle', 'rb') as pickle_file:
     model = pickle.load(pickle_file)
 
-with open('model/encoder.pickle', 'rb') as pickle_file:
+with open('starter/model/encoder.pickle', 'rb') as pickle_file:
     encoder = pickle.load(pickle_file)
 
-with open('model/label_binarizer.pickle', 'rb') as pickle_file:
+with open('starter/model/label_binarizer.pickle', 'rb') as pickle_file:
     lb = pickle.load(pickle_file)   
 
 #categorical features

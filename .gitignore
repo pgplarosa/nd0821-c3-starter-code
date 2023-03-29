@@ -4,3 +4,4 @@ starter/starter/__pycache__/
 .vscode/
 starter/__pycache__/
 starter/notebook/.ipynb_checkpoints/
+__pycache__/

@@ -16,9 +16,9 @@ with open('starter/model/encoder.pickle', 'rb') as pickle_file:
     encoder = pickle.load(pickle_file)
 
 with open('starter/model/label_binarizer.pickle', 'rb') as pickle_file:
-    lb = pickle.load(pickle_file)   
+    lb = pickle.load(pickle_file)
 
-#categorical features
+# categorical features
 cat_features = [
     "workclass",
     "education",
@@ -31,6 +31,8 @@ cat_features = [
 ]
 
 # Features to ingest the body from POST
+
+
 class Features(BaseModel):
     age: int = 39
     workclass: str = 'State-gov'
@@ -44,26 +46,27 @@ class Features(BaseModel):
     sex: str = 'Male'
     capital_gain: int = 2174
     capital_loss: int = 0
-    hours_per_week: int  = 40
+    hours_per_week: int = 40
     native_country: str = 'United-States'
 
 
 @app.get("/")
 async def welcome_user():
-    return {"message": 
+    return {"message":
             "Greetings! Welcome to this project!"}
+
 
 @app.post("/predictions")
 def predict_model(features: Features):
-    data = pd.DataFrame(data = features.dict(by_alias=True), index=[0])
+    data = pd.DataFrame(data=features.dict(by_alias=True), index=[0])
     print(data)
     X, _, _, _ = process_data(
-                                data,
-                                categorical_features=cat_features,
-                                label=None,
-                                training=False,
-                                encoder=encoder,
-                                lb=lb)
+        data,
+        categorical_features=cat_features,
+        label=None,
+        training=False,
+        encoder=encoder,
+        lb=lb)
 
     predict = model.predict(X)
 
@@ -71,5 +74,5 @@ def predict_model(features: Features):
         predict = "Salary > 50k"
     else:
         predict = "Salary <= 50k"
-    
+
     return {'predict': predict}

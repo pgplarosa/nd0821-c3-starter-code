@@ -19,8 +19,8 @@ data['native-country'] = ' United-States'
 
 print('input_data: ', data)
 
-resp1 = requests.post('https://income-classifier.onrender.com/predictions', 
-              data=json.dumps(data))
+resp1 = requests.post('https://income-classifier.onrender.com/predictions',
+                      data=json.dumps(data))
 print('status code: ', resp1.status_code)
 print('predictions: ', resp1.json())
 
@@ -40,11 +40,9 @@ data['capital_loss'] = 0
 data['hours_per_week'] = 40
 data['native-country'] = ' United-States'
 print('input_data: ', data)
-resp2 = requests.post('https://income-classifier.onrender.com/predictions', 
-              data=json.dumps(data))
+resp2 = requests.post('https://income-classifier.onrender.com/predictions',
+                      data=json.dumps(data))
 
 
 print('status code: ', resp2.status_code)
 print('predictions: ', resp2.json())
-
-
